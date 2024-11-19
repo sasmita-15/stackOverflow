@@ -1,18 +1,14 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import '@fortawesome/fontawesome-free/css/all.min.css'; // Font Awesome CSS
-import { fab } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Header = () => {
   return (
-    <header className="border-b-2 border-gray-300 bg-white h-16 flex justify-between items-center px-8 shadow-md">
-      {/* Logo Section */}
-      <div className="flex items-center px-4">
-      <i className="fa-brands fa-stack-overflow text-3xl text-orange-500 w-12 h-7"></i>
-        <span className="text-xl font-medium ">Stack</span><span className="text-xl font-bold ">Overflow</span>
-      </div>
+    <header className="border-b-2 border-none bg-slate-100 h-16 flex justify-between items-center px-8">
 
-      {/* Search Bar Section */}
+      <div className="flex items-center px-4">
+      <FontAwesomeIcon icon="fa-brands fa-stack-overflow h-5 w-10" />
+        <span className="text-xl font-medium ">Stack</span><span className="text-xl font-bold ">Overflow</span>
+      </div> 
       <div className="flex-grow max-w-xl mx-4">
         <input
           type="text"
@@ -20,8 +16,6 @@ const Header = () => {
           placeholder="Search your answers here..."
         />
       </div>
-
-      {/* Icons Section */}
       <div className="flex items-center space-x-6 px-4">
         <span className="text-2xl cursor-pointer hover:text-orange-500">
           🔔

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from 'moment';
 
 const QuestionsList = () => {
   const [questions, setQuestions] = useState([]);
@@ -23,7 +24,7 @@ const QuestionsList = () => {
         );
         setLoading(false);
         setQuestions(response.data.items);
-        console.log(response.data.items.length)
+        
       } catch (error) {
         setLoading(false);
         setError(true);
@@ -51,8 +52,8 @@ const QuestionsList = () => {
   }
 
   return (
-    <div className="questions-list max-w-5xl mx-auto p-6">
-      {/* Filter Buttons */}
+    <div className="questions-list max-w-5xl mx-auto p-6 bg-slate-100">
+      <div className="text-3xl pb-4 font-bold">Top Qustions</div>
       <div className="flex space-x-4 mb-6">
         {["activity", "hot", "votes" , "month", "week"].map((type) => (
           <button
@@ -73,10 +74,10 @@ const QuestionsList = () => {
       <div className="space-y-4">
         {questions.map((question) => (
           <div
-            className="question border border-gray-300 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+            className="question border border-gray-300 bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
             key={question.question_id}
           >
-            <h3 className="text-lg font-semibold text-blue-600 hover:underline">
+            <h3 className="text-lg font-semibold text-black hover:underline">
               <a href={question.link} target="_blank" rel="noopener noreferrer">
                 {question.title}
               </a>
@@ -93,7 +94,7 @@ const QuestionsList = () => {
             </div>
             <p className="text-sm text-gray-600 mt-3">
               Votes: {question.score} | Answers: {question.answer_count} | Views:{" "}
-              {question.view_count}
+              {question.view_count} | Last activity : {question.creation_date}{moment(question.creation_date).fromNow()}
             </p>
           </div>
         ))}
