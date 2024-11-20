@@ -18,7 +18,7 @@ const HomePage = () => {
           <Sidebar className=" bg-white shadow-md hidden md:block" />
         </div>
         <div className="w-7/12 flex-grow">
-          {/* <QuestionsList searchQuery={searchQuery} /> */}
+          <QuestionsList searchQuery={searchQuery} />
           {/* <h1>Qustionss</h1> */}
         </div>
         <div className="w-3/12 h-full">

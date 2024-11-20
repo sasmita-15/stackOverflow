@@ -8,6 +8,7 @@ const QuestionsList = ({ searchQuery }) => {
   const [error, setError] = useState(false);
   const [filter, setFilter] = useState("activity");
 
+
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -24,8 +25,6 @@ const QuestionsList = ({ searchQuery }) => {
         );
         setLoading(false);
         setQuestions(response.data.items);
-        console.log(searchQuery)
-
       } catch (error) {
         setLoading(false);
         setError(true);
@@ -62,8 +61,8 @@ const QuestionsList = ({ searchQuery }) => {
               key={type}
               onClick={() => setFilter(type)}
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${filter === type
-                  ? "bg-orange-500 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                ? "bg-orange-500 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
             >
               {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -81,7 +80,9 @@ const QuestionsList = ({ searchQuery }) => {
 
 
       <div className="space-y-4">
-        {questions.map((question) => (
+        {questions.filter((item)=>{
+                return searchQuery === '' ? item : item.title.includes(searchQuery)
+              }).map((question) => (
           <div
             className="question border border-gray-300 bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
             key={question.question_id}
