@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from 'moment';
 
-const QuestionsList = () => {
+const QuestionsList = ({ searchQuery }) => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -24,7 +24,8 @@ const QuestionsList = () => {
         );
         setLoading(false);
         setQuestions(response.data.items);
-        
+        console.log(searchQuery)
+
       } catch (error) {
         setLoading(false);
         setError(true);
@@ -33,7 +34,7 @@ const QuestionsList = () => {
     };
 
     fetchQuestions();
-  }, [filter]); // Re-fetch data when the filter changes
+  }, [filter, searchQuery]);
 
   if (error) {
     return (
@@ -54,23 +55,31 @@ const QuestionsList = () => {
   return (
     <div className="questions-list max-w-5xl mx-auto p-6 bg-slate-100">
       <div className="text-3xl pb-4 font-bold">Top Qustions</div>
-      <div className="flex space-x-4 mb-6">
-        {["activity", "hot", "votes" , "month", "week"].map((type) => (
-          <button
-            key={type}
-            onClick={() => setFilter(type)}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
-              filter === type
-                ? "bg-orange-500 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            {type.charAt(0).toUpperCase() + type.slice(1)}
-          </button>
-        ))}
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex space-x-4">
+          {["activity", "hot", "votes", "month", "week"].map((type) => (
+            <button
+              key={type}
+              onClick={() => setFilter(type)}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${filter === type
+                  ? "bg-orange-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                }`}
+            >
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </button>
+          ))}
+        </div>
+
+        <button
+          onClick={() => console.log("Add Question clicked")}
+          className="px-4 py-2 bg-blue-500 text-white rounded-3xl text-sm font-semibold hover:bg-blue-600 transition-colors"
+        >
+          Add Question
+        </button>
       </div>
 
-      {/* Questions List */}
+
       <div className="space-y-4">
         {questions.map((question) => (
           <div
@@ -92,9 +101,13 @@ const QuestionsList = () => {
                 </span>
               ))}
             </div>
-            <p className="text-sm text-gray-600 mt-3">
-              Votes: {question.score} | Answers: {question.answer_count} | Views:{" "}
-              {question.view_count} | Last activity : {question.creation_date}{moment(question.creation_date).fromNow()}
+            <p className="text-sm text-gray-600 mt-3 flex justify-between">
+              <span>
+                Votes: {question.score} | Answers: {question.answer_count} | Views:{" "} {question.view_count}
+              </span>
+              <span className="text-right">
+                Last activity: {moment.unix(question.creation_date).fromNow()}
+              </span>
             </p>
           </div>
         ))}
