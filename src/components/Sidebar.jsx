@@ -2,7 +2,7 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <aside className="sidebar w-full bg-gray-100 shadow-md h-full p-4 hidden md:block">
+    <aside className="sidebar w-full bg-slate-100 h-full p-4 hidden md:block">
       <nav>
         <ul>
 

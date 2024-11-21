@@ -2,7 +2,7 @@ import React from "react";
 
 const RightSidebar = () => {
   return (
-    <div className="w-80 bg-gray-50 border-l border-gray-200 p-4">
+    <div className="w-80 bg-slate-100 pt-8 pl-4">
       
       <div className="mb-6">
         <h3 className="text-lg font-bold  text-gray-700 mb-4">The Overflow Blog</h3>
@@ -35,7 +35,7 @@ const RightSidebar = () => {
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-gray-700 mb-4">Hot Meta Posts</h3>
 
-        <p className="text-sm text-gray-500">Add posts as needed.</p>
+        <p className="text-sm text-gray-500">Hot meta posts.....</p>
       </div>
       <div>
         <h3 className="text-lg font-semibold text-gray-700 mb-4">Custom Filter</h3>
